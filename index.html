@@ -1,0 +1,504 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <!-- SEO Meta Tags for Google Ranking -->
+    <title>Free QR Code Generator - Create Custom & Transparent QR Codes</title>
+    <meta name="description" content="The ultimate free tool for generating and scanning high-quality QR codes instantly. Create transparent QR codes with zero tracking or ads.">
+    <meta name="keywords" content="QR code generator, free QR code, transparent QR code, custom QR code, QR scanner, Naem Azam">
+    <meta name="author" content="Naem Azam">
+    <link rel="canonical" href="https://naemazam.github.io/Free-QR-Code-Generator/">
+    
+    <!-- Open Graph for Social Media Sharing -->
+    <meta property="og:title" content="Free QR Code Generator">
+    <meta property="og:description" content="Generate high-quality, transparent QR codes for free. No ads, no sign-ups.">
+    <meta property="og:url" content="https://naemazam.github.io/Free-QR-Code-Generator/">
+    <meta property="og:type" content="website">
+
+    <style>
+        :root {
+            --primary-color: #2563eb;
+            --primary-hover: #1d4ed8;
+            --bg-color: #f8fafc;
+            --card-bg: #ffffff;
+            --text-main: #1e293b;
+            --text-muted: #64748b;
+            --error-color: #ef4444;
+            --nav-bg: #ffffff;
+            --footer-bg: #0f172a;
+            --github-dark: #24292e;
+        }
+
+        body {
+            font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
+            background-color: var(--bg-color);
+            color: var(--text-main);
+            margin: 0;
+            display: flex;
+            flex-direction: column;
+            min-height: 100vh;
+        }
+
+        /* Navbar */
+        .navbar {
+            background-color: var(--nav-bg);
+            padding: 0.75rem 2rem;
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+            box-shadow: 0 1px 3px rgba(0,0,0,0.1);
+            position: sticky;
+            top: 0;
+            z-index: 100;
+        }
+
+        .logo-area {
+            display: flex;
+            align-items: center;
+            gap: 10px;
+            font-weight: 800;
+            font-size: 1.4rem;
+            color: var(--primary-color);
+            text-decoration: none;
+        }
+
+        .logo-icon {
+            width: 36px;
+            height: 36px;
+            background: linear-gradient(135deg, var(--primary-color), #3b82f6);
+            border-radius: 8px;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            color: white;
+        }
+
+        .nav-right {
+            display: flex;
+            gap: 20px;
+            align-items: center;
+        }
+
+        .nav-link {
+            text-decoration: none;
+            color: var(--text-muted);
+            font-weight: 600;
+            font-size: 0.9rem;
+            cursor: pointer;
+            transition: color 0.2s;
+        }
+        .nav-link:hover { color: var(--primary-color); }
+
+        .github-icon-link {
+            color: var(--text-muted);
+            transition: color 0.2s;
+            display: flex;
+            align-items: center;
+        }
+        .github-icon-link:hover { color: #000; }
+
+        .btn-scan-nav {
+            background-color: var(--primary-color);
+            color: white;
+            border: none;
+            padding: 8px 16px;
+            border-radius: 8px;
+            font-weight: 600;
+            cursor: pointer;
+            transition: background 0.2s;
+        }
+
+        /* Layout */
+        .main-content {
+            flex: 1;
+            display: flex;
+            justify-content: center;
+            padding: 40px 20px;
+        }
+
+        .view-container {
+            max-width: 1000px;
+            width: 100%;
+        }
+
+        .app-grid {
+            display: grid;
+            grid-template-columns: 1fr 350px;
+            gap: 2rem;
+        }
+
+        .card {
+            background-color: var(--card-bg);
+            border-radius: 24px;
+            box-shadow: 0 20px 25px -5px rgba(0, 0, 0, 0.05);
+            padding: 2.5rem;
+        }
+
+        /* About Creator View */
+        .about-card { text-align: center; max-width: 600px; margin: 0 auto; }
+        .profile-img {
+            width: 100px; height: 100px; border-radius: 50%;
+            background: #e2e8f0; margin: 0 auto 1rem;
+            display: flex; align-items: center; justify-content: center;
+            font-size: 2.5rem; border: 4px solid white;
+            box-shadow: 0 4px 6px rgba(0,0,0,0.1);
+        }
+
+        .social-links { display: flex; justify-content: center; flex-wrap: wrap; gap: 10px; margin-top: 1.5rem; }
+        .social-btn {
+            padding: 8px 14px; border-radius: 8px; text-decoration: none;
+            font-weight: 600; font-size: 0.85rem; display: flex; align-items: center; gap: 6px; transition: 0.2s;
+        }
+        .social-github { background: #181717; color: white; }
+        .social-youtube { background: #FF0000; color: white; }
+        .social-twitter { background: #1da1f2; color: white; }
+        .social-btn:hover { transform: translateY(-2px); filter: brightness(1.1); }
+
+        /* Generator Inputs */
+        .control-group { margin-bottom: 1.5rem; }
+        .control-label { display: block; font-size: 0.8rem; font-weight: 700; color: var(--text-muted); margin-bottom: 6px; text-transform: uppercase; }
+
+        input[type="text"] {
+            padding: 14px; border: 2px solid #f1f5f9; border-radius: 12px;
+            width: 100%; box-sizing: border-box; outline: none; font-size: 1rem; background: #f8fafc;
+        }
+
+        .style-options { display: grid; grid-template-columns: repeat(3, 1fr); gap: 8px; }
+        .style-btn { padding: 12px; border: 2px solid #f1f5f9; background: white; border-radius: 12px; cursor: pointer; font-weight: 600; }
+        .style-btn.active { border-color: var(--primary-color); background: #eff6ff; color: var(--primary-color); }
+
+        /* Checkbox Styling */
+        .checkbox-container {
+            display: flex; align-items: center; gap: 10px; margin-top: 1.25rem;
+            font-size: 0.95rem; font-weight: 600; color: var(--text-main); cursor: pointer;
+        }
+        .checkbox-container input[type="checkbox"] {
+            width: 18px; height: 18px; cursor: pointer; accent-color: var(--primary-color);
+        }
+
+        /* QR Preview Side */
+        .preview-side { display: flex; flex-direction: column; align-items: center; }
+        #qrcode {
+            background-color: #ffffff;
+            background-image: linear-gradient(45deg, #f1f5f9 25%, transparent 25%, transparent 75%, #f1f5f9 75%, #f1f5f9), 
+                              linear-gradient(45deg, #f1f5f9 25%, transparent 25%, transparent 75%, #f1f5f9 75%, #f1f5f9);
+            background-size: 20px 20px;
+            background-position: 0 0, 10px 10px;
+            padding: 20px; border-radius: 20px;
+            box-shadow: 0 10px 15px -3px rgba(0, 0, 0, 0.1); margin-bottom: 1.5rem;
+            min-height: 256px; width: 256px; display: flex; justify-content: center; align-items: center; border: 2px solid #e2e8f0;
+        }
+
+        .main-btn {
+            width: 100%; padding: 14px; border: none; border-radius: 12px;
+            cursor: pointer; font-size: 1rem; font-weight: 600; transition: 0.2s;
+        }
+        .btn-primary { background-color: var(--primary-color); color: white; }
+        .btn-secondary { background-color: #f1f5f9; color: var(--text-main); }
+        .btn-download { background-color: #1e293b; color: white; margin-top: 10px; display: none; }
+
+        /* Modals */
+        .modal-overlay {
+            position: fixed; top: 0; left: 0; right: 0; bottom: 0;
+            background: rgba(15, 23, 42, 0.8); backdrop-filter: blur(4px);
+            display: none; justify-content: center; align-items: center; z-index: 1000;
+        }
+        .modal {
+            background: white; padding: 2.5rem; border-radius: 24px;
+            max-width: 420px; width: 90%; position: relative; text-align: center;
+        }
+        .close-btn { 
+            position: absolute; top: 1rem; right: 1rem; cursor: pointer; 
+            background: #f1f5f9; border: none; width: 32px; height: 32px; border-radius: 50%;
+            display: flex; align-items: center; justify-content: center;
+        }
+
+        /* GitHub Modal Elements */
+        .github-star-icon { color: #f59e0b; font-size: 3.5rem; margin-bottom: 1rem; }
+        .modal-title { font-size: 1.5rem; font-weight: 800; margin-bottom: 0.5rem; }
+        .modal-desc { color: var(--text-muted); line-height: 1.5; margin-bottom: 2rem; }
+        .modal-actions { display: flex; flex-direction: column; gap: 10px; }
+        .btn-github { background-color: var(--github-dark); color: white; display: flex; align-items: center; justify-content: center; gap: 10px; text-decoration: none; }
+
+        /* Footer */
+        .footer { background-color: var(--footer-bg); color: #f8fafc; padding: 4rem 2rem 1.5rem; margin-top: auto; }
+        .footer-container {
+            max-width: 1000px; margin: 0 auto; display: grid; grid-template-columns: 2fr 1fr 1fr;
+            gap: 3rem; border-bottom: 1px solid rgba(255,255,255,0.1); padding-bottom: 2rem;
+        }
+        .footer-brand h3 { margin: 0 0 1rem; font-size: 1.25rem; color: white; }
+        .footer-brand p { color: #94a3b8; line-height: 1.6; margin-bottom: 1.5rem; font-size: 0.9rem; max-width: 300px;}
+        .footer-social-icons { display: flex; gap: 12px; }
+        .footer-social-icons a {
+            display: flex; align-items: center; justify-content: center; width: 40px; height: 40px;
+            border-radius: 10px; background: rgba(255,255,255,0.05); color: #cbd5e1; transition: 0.3s;
+        }
+        .footer-social-icons a:hover { background: var(--primary-color); color: white; transform: translateY(-3px); }
+        .footer-bottom {
+            max-width: 1000px; margin: 0 auto; padding-top: 1.5rem; display: flex;
+            justify-content: space-between; align-items: center; font-size: 0.85rem; color: #64748b;
+        }
+
+        #reader { width: 100%; border-radius: 12px; overflow: hidden; background: #000; }
+        .result-box { margin-top: 1rem; padding: 1.2rem; background: #f0f9ff; border: 1px solid #bae6fd; border-radius: 12px; display: none; word-break: break-all; }
+        .hidden { display: none !important; }
+
+        @media (max-width: 768px) {
+            .app-grid { grid-template-columns: 1fr; }
+            .footer-container { grid-template-columns: 1fr; gap: 2rem; text-align: center; }
+            .footer-brand p { margin: 0 auto 1.5rem; }
+            .footer-social-icons { justify-content: center; }
+            .footer-bottom { flex-direction: column; gap: 1rem; }
+        }
+    </style>
+</head>
+<body>
+    <nav class="navbar">
+        <a href="#" class="logo-area" onclick="showView('home')">
+            <div class="logo-icon">
+                <svg width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="3"><rect x="3" y="3" width="7" height="7"></rect><rect x="14" y="3" width="7" height="7"></rect><rect x="14" y="14" width="7" height="7"></rect><rect x="3" y="14" width="7" height="7"></rect></svg>
+            </div>
+            <span>Free QRCode</span>
+        </a>
+        <div class="nav-right">
+            <span class="nav-link" onclick="showView('about')">About Creator</span>
+            <button onclick="openScanner()" class="btn-scan-nav">Scan Code</button>
+        </div>
+    </nav>
+
+    <div class="main-content">
+        <!-- Generator View -->
+        <div id="homeView" class="view-container">
+            <div class="app-grid">
+                <div class="card">
+                    <h2 style="margin-top:0">Generate QR</h2>
+                    <p style="color:var(--text-muted); margin-bottom: 2rem;">Create a professional QR code instantly.</p>
+                    <div class="control-group">
+                        <label class="control-label">URL / Text</label>
+                        <input type="text" id="urlInput" placeholder="https://youtube.com/@NaemAzamChowdhury" oninput="generateQR()">
+                    </div>
+                    <div class="control-group">
+                        <label class="control-label">Design Style</label>
+                        <div class="style-options">
+                            <button class="style-btn active" onclick="setStyle('square', this)">Square</button>
+                            <button class="style-btn" onclick="setStyle('rounded', this)">Rounded</button>
+                            <button class="style-btn" onclick="setStyle('dots', this)">Dots</button>
+                        </div>
+                        <!-- Transparent Background Option -->
+                        <label class="checkbox-container">
+                            <input type="checkbox" id="transparentBg" onchange="generateQR()">
+                            Transparent Background
+                        </label>
+                    </div>
+                    <button class="main-btn btn-primary" onclick="generateQR()">Create QR Code</button>
+                </div>
+
+                <div class="preview-side">
+                    <div id="qrcode">
+                        <span style="color:#94a3b8; background: white; padding: 4px 8px; border-radius: 4px;">Preview Area</span>
+                    </div>
+                    <button id="downloadBtn" class="main-btn btn-download" onclick="triggerDownloadProcess()">Download PNG</button>
+                </div>
+            </div>
+        </div>
+
+        <!-- About Creator View -->
+        <div id="aboutView" class="view-container hidden">
+            <div class="card about-card">
+                <div class="profile-img">👨‍💻</div>
+                <h2 style="margin-bottom:0.25rem">Naem Azam</h2>
+                <p style="color:var(--text-muted); font-size:1rem; margin-bottom:1.5rem;">Software Developer</p>
+                <p style="line-height:1.6; color:var(--text-main); max-width: 400px; margin: 0 auto;">
+                    I build tools that simplify the web. This project is open source and free for everyone to use.
+                </p>
+                <div class="social-links">
+                    <a href="https://github.com/naemazam" target="_blank" class="social-btn social-github">GitHub</a>
+                    <a href="https://www.youtube.com/@NaemAzamChowdhury" target="_blank" class="social-btn social-youtube">YouTube</a>
+                    <a href="https://twitter.com/naem_azam" target="_blank" class="social-btn social-twitter">Twitter</a>
+                </div>
+                <button class="main-btn btn-primary" style="margin-top:2rem;" onclick="showView('home')">Return to Generator</button>
+            </div>
+        </div>
+    </div>
+
+    <!-- GitHub Star Modal -->
+    <div class="modal-overlay" id="githubModal">
+        <div class="modal">
+            <button class="close-btn" onclick="closeGithubModal()">&times;</button>
+            <div class="github-star-icon">⭐</div>
+            <div class="modal-title">Support the Project!</div>
+            <p class="modal-desc">Your QR code download has started. If you find this tool helpful, please consider giving us a star on GitHub!</p>
+            
+            <div class="modal-actions">
+                <a href="https://github.com/naemazam/Free-QR-Code-Generator" target="_blank" class="main-btn btn-github" onclick="closeGithubModal()">
+                    <svg width="20" height="20" fill="currentColor" viewBox="0 0 24 24"><path d="M12 0c-6.626 0-12 5.373-12 12 0 5.302 3.438 9.8 8.207 11.387.599.111.793-.261.793-.577v-2.234c-3.338.726-4.033-1.416-4.033-1.416-.546-1.387-1.333-1.756-1.333-1.756-1.089-.745.083-.729.083-.729 1.205.084 1.839 1.237 1.839 1.237 1.07 1.834 2.807 1.304 3.492.997.107-.775.418-1.305.762-1.604-2.665-.305-5.467-1.334-5.467-5.931 0-1.311.469-2.381 1.236-3.221-.124-.303-.535-1.524.117-3.176 0 0 1.008-.322 3.301 1.23.957-.266 1.983-.399 3.003-.404 1.02.005 2.047.138 3.006.404 2.291-1.552 3.297-1.23 3.297-1.23.653 1.653.242 2.874.118 3.176.77.84 1.235 1.911 1.235 3.221 0 4.609-2.807 5.624-5.479 5.921.43.372.823 1.102.823 2.222v3.293c0 .319.192.694.801.576 4.765-1.589 8.199-6.086 8.199-11.386 0-6.627-5.373-12-12-12z"/></svg>
+                    Star on GitHub
+                </a>
+                <button class="main-btn btn-secondary" onclick="closeGithubModal()">Maybe Later</button>
+            </div>
+        </div>
+    </div>
+
+    <!-- Scanner Modal -->
+    <div class="modal-overlay" id="scannerModal">
+        <div class="modal">
+            <button class="close-btn" onclick="closeScanner()">&times;</button>
+            <h3 style="margin-top:0">Scan QR Code</h3>
+            <div id="reader"></div>
+            <div style="margin-top:1.5rem; display:flex; gap:10px;">
+                <button class="main-btn btn-primary" onclick="document.getElementById('fileInput').click()">Upload Image</button>
+                <input type="file" id="fileInput" hidden accept="image/*" onchange="scanFile(this)">
+            </div>
+            <div id="resultBox" class="result-box">
+                <strong style="color:#0369a1">Found:</strong><br>
+                <a id="scannedUrl" href="#" target="_blank" style="color:var(--primary-color); word-break: break-all;"></a>
+            </div>
+        </div>
+    </div>
+
+    <footer class="footer">
+        <div class="footer-container">
+            <div class="footer-brand">
+                <h3>Free QRCode</h3>
+                <p>Fast, secure, and beautiful QR code generation. No tracking, just utility.</p>
+                <div class="footer-social-icons">
+                    <a href="https://github.com/naemazam" target="_blank" title="GitHub">
+                        <svg width="20" height="20" fill="currentColor" viewBox="0 0 24 24"><path d="M12 0c-6.626 0-12 5.373-12 12 0 5.302 3.438 9.8 8.207 11.387.599.111.793-.261.793-.577v-2.234c-3.338.726-4.033-1.416-4.033-1.416-.546-1.387-1.333-1.756-1.333-1.756-1.089-.745.083-.729.083-.729 1.205.084 1.839 1.237 1.839 1.237 1.07 1.834 2.807 1.304 3.492.997.107-.775.418-1.305.762-1.604-2.665-.305-5.467-1.334-5.467-5.931 0-1.311.469-2.381 1.236-3.221-.124-.303-.535-1.524.117-3.176 0 0 1.008-.322 3.301 1.23.957-.266 1.983-.399 3.003-.404 1.02.005 2.047.138 3.006.404 2.291-1.552 3.297-1.23 3.297-1.23.653 1.653.242 2.874.118 3.176.77.84 1.235 1.911 1.235 3.221 0 4.609-2.807 5.624-5.479 5.921.43.372.823 1.102.823 2.222v3.293c0 .319.192.694.801.576 4.765-1.589 8.199-6.086 8.199-11.386 0-6.627-5.373-12-12-12z"/></svg>
+                    </a>
+                    <a href="https://www.youtube.com/@NaemAzamChowdhury" target="_blank" title="YouTube" style="color:#FF0000">
+                        <svg width="20" height="20" fill="currentColor" viewBox="0 0 24 24"><path d="M23.498 6.186a3.016 3.016 0 0 0-2.122-2.136C19.505 3.545 12 3.545 12 3.545s-7.505 0-9.377.505A3.017 3.017 0 0 0 .502 6.186C0 8.07 0 12 0 12s0 3.93.502 5.814a3.016 3.016 0 0 0 2.122 2.136c1.871.505 9.377.505 9.377.505s7.505 0 9.377-.505a3.015 3.015 0 0 0 2.122-2.136C24 15.93 24 12 24 12s0-3.93-.502-5.814zM9.545 15.568V8.432L15.818 12l-6.273 3.568z"/></svg>
+                    </a>
+                    <a href="https://twitter.com/naem_azam" target="_blank" title="Twitter" style="color:#1da1f2">
+                        <svg width="18" height="18" fill="currentColor" viewBox="0 0 24 24"><path d="M18.244 2.25h3.308l-7.227 8.26 8.502 11.24H16.17l-5.214-6.817L4.99 21.75H1.68l7.73-8.835L1.254 2.25H8.08l4.713 6.231zm-1.161 17.52h1.833L7.084 4.126H5.117z"/></svg>
+                    </a>
+                </div>
+            </div>
+            <div class="footer-links">
+                <h4>Tool</h4>
+                <ul>
+                    <li><a href="#" onclick="showView('home')">Generator</a></li>
+                    <li><a href="#" onclick="openScanner()">Scanner</a></li>
+                </ul>
+            </div>
+            <div class="footer-links">
+                <h4>About</h4>
+                <ul>
+                    <li><a href="#" onclick="showView('about')">Creator</a></li>
+                    <li><a href="https://github.com/naemazam/Free-QR-Code-Generator" target="_blank">Star Repo</a></li>
+                </ul>
+            </div>
+        </div>
+        <div class="footer-bottom">
+            <span>&copy; <span id="year"></span> Free QRCode.</span>
+            <span>Created by Naem Azam</span>
+        </div>
+    </footer>
+
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/qrcodejs/1.0.0/qrcode.min.js"></script>
+    <script src="https://unpkg.com/html5-qrcode"></script>
+    <script>
+        document.getElementById('year').textContent = new Date().getFullYear();
+        
+        let currentStyle = 'square';
+        const qrDiv = document.getElementById("qrcode");
+        const downloadBtn = document.getElementById("downloadBtn");
+
+        function showView(view) {
+            document.getElementById('homeView').classList.toggle('hidden', view !== 'home');
+            document.getElementById('aboutView').classList.toggle('hidden', view !== 'about');
+            window.scrollTo(0, 0);
+        }
+
+        function setStyle(style, btn) {
+            currentStyle = style;
+            document.querySelectorAll('.style-btn').forEach(b => b.classList.remove('active'));
+            btn.classList.add('active');
+            generateQR();
+        }
+
+        function generateQR() {
+            const val = document.getElementById("urlInput").value.trim();
+            const isTransparent = document.getElementById("transparentBg").checked;
+
+            if (!val) {
+                qrDiv.innerHTML = '<span style="color:#94a3b8; background: white; padding: 4px 8px; border-radius: 4px;">Preview Area</span>';
+                downloadBtn.style.display = "none";
+                return;
+            }
+            qrDiv.innerHTML = "";
+            new QRCode(qrDiv, {
+                text: val,
+                width: 256,
+                height: 256,
+                colorDark: "#000000",
+                colorLight: isTransparent ? "rgba(255,255,255,0)" : "#ffffff",
+                correctLevel: QRCode.CorrectLevel.H
+            });
+            downloadBtn.style.display = "block";
+        }
+
+        // --- Download Process ---
+        function triggerDownloadProcess() {
+            // 1. Show the GitHub Star Modal
+            document.getElementById("githubModal").style.display = "flex";
+
+            // 2. Automatically trigger download
+            const canvas = qrDiv.querySelector('canvas');
+            if (canvas) {
+                const link = document.createElement('a');
+                link.download = 'free-qrcode.png';
+                link.href = canvas.toDataURL("image/png");
+                document.body.appendChild(link);
+                link.click();
+                document.body.removeChild(link);
+            }
+        }
+
+        function closeGithubModal() {
+            document.getElementById("githubModal").style.display = "none";
+        }
+
+        // --- Scanner Logic ---
+        let html5QrCode;
+        function openScanner() {
+            document.getElementById("scannerModal").style.display = "flex";
+            document.getElementById("resultBox").style.display = "none";
+            html5QrCode = new Html5Qrcode("reader");
+            html5QrCode.start({ facingMode: "environment" }, { fps: 10, qrbox: 250 }, 
+            (decodedText) => showScanResult(decodedText))
+            .catch(() => {
+                document.getElementById("reader").innerHTML = "<p style='padding:20px; text-align:center;'>Camera access denied or unavailable.</p>";
+            });
+        }
+
+        function closeScanner() {
+            if (html5QrCode && html5QrCode.isScanning) {
+                html5QrCode.stop().then(() => {
+                    html5QrCode.clear();
+                    document.getElementById("scannerModal").style.display = "none";
+                });
+            } else {
+                document.getElementById("scannerModal").style.display = "none";
+            }
+        }
+
+        function scanFile(input) {
+            if (input.files.length === 0) return;
+            const fileScanner = new Html5Qrcode("reader");
+            fileScanner.scanFile(input.files[0], true)
+                .then(text => showScanResult(text))
+                .catch(() => alert("No QR code detected in this image."));
+        }
+
+        function showScanResult(text) {
+            const resultBox = document.getElementById("resultBox");
+            const link = document.getElementById("scannedUrl");
+            resultBox.style.display = "block";
+            link.textContent = text;
+            link.href = text.startsWith("http") ? text : "#";
+            if (html5QrCode && html5QrCode.isScanning) html5QrCode.stop();
+        }
+    </script>
+</body>
+</html>
